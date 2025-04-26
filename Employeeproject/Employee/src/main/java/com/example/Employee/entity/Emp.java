@@ -1,9 +1,11 @@
 package com.example.Employee.entity;
 
 import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 public class Emp {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -14,47 +16,51 @@ public class Emp {
 
     @ManyToOne
     @JoinColumn(name = "department_id")
+    @JsonIgnoreProperties("employees")  // Important to avoid infinite recursion
     private Department department;
 
-	public Long getId() {
-		return id;
-	}
+    // Default constructor (required by JPA)
+    public Emp() {
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    // Getters and Setters
+    public Long getId() {
+        return id;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public String getEmail() {
-		return email;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    public String getEmail() {
+        return email;
+    }
 
-	public double getSalary() {
-		return salary;
-	}
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-	public void setSalary(double salary) {
-		this.salary = salary;
-	}
+    public double getSalary() {
+        return salary;
+    }
 
-	public Department getDepartment() {
-		return department;
-	}
+    public void setSalary(double salary) {
+        this.salary = salary;
+    }
 
-	public void setDepartment(Department department) {
-		this.department = department;
-	}
+    public Department getDepartment() {
+        return department;
+    }
 
-    
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
 }
