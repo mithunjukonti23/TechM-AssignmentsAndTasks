@@ -4,8 +4,11 @@ import com.ecommerce.entity.User;
 import com.ecommerce.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/api/v1/users")
 public class UserController {
 
@@ -18,8 +21,7 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public String login(@RequestBody User user) {
-        // Add authentication logic here (e.g., JWT token)
-        return "Login successful!";
+    public ResponseEntity<String> login(@RequestBody User user) {
+        return userService.login(user);
     }
 }
